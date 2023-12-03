@@ -1,0 +1,255 @@
+﻿<Window x:Class="rpm.Client"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:rpm"
+        mc:Ignorable="d"
+        Title="Window1"  Height="1024" Width="1440">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель (Header) -->
+        <WrapPanel Grid.Row="0" Height="100" Width="Auto" Background="BurlyWood">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" MinWidth="54"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" MinWidth="1084"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image  Grid.Column="0" Margin="70,31,10,45" Source="C:\Users\Zukhr\Downloads\icons8-пользователь-мужчина-в-кружке.gif" RenderTransformOrigin="0.968,0.5" />
+                <TextBlock  Grid.Column="1" FontSize="16" FontFamily="Inter" Grid.ColumnSpan="2" Margin="0,36,1038,41" ><Run Text="Личный кабинет"  /></TextBlock>
+                <Button  Grid.Column="2" Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1046,0,0,0" Height="39" Width="110" Click="Button_Click" >
+                </Button>
+            </Grid>
+        </WrapPanel>
+
+        <!-- Основная часть -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Левая панель (меню) --><!--
+            <Border Grid.Column="0" Width="290" Height="Auto" Background="#EEE">
+                <StackPanel Margin="20">
+                    <Button Content="Администратор" Style="{StaticResource ButtonPanelStyle}" />
+                    <Button Content="Клиент" FontWeight="Black"  Style="{StaticResource ButtonPanelStyle}" Click="ClientButton_Click"/>
+                    <Button Content="Сотрудник" Style="{StaticResource ButtonPanelStyle}" Click="TrenerButton_Click_2"/>
+                    <Button Content="Расписание" Style="{StaticResource ButtonPanelStyle}"/>
+                </StackPanel>
+            </Border>-->
+            <WrapPanel>
+                <local:Left></local:Left>
+            </WrapPanel>
+
+            <!-- Основная часть с клиентами -->
+            <Border Grid.Column="1" Width="Auto" Background="#FFF">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Поиск, Фильтры и Кнопка Добавить -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                        <!-- Кнопка "Поиск" -->
+                        <Button Content="Поиск" Margin="10" Width="60"/>
+                        <ComboBox Width="120" Margin="10">
+                            <ComboBoxItem Content="Все группы"/>
+                            <ComboBoxItem Content="Индивидуальные"/>
+                            <ComboBoxItem Content="Групповые"/>
+                        </ComboBox>
+                        <ComboBox Width="120" Margin="10">
+                            <ComboBoxItem Content="Все танцы"/>
+                            <ComboBoxItem Content="Бальные"/>
+                            <ComboBoxItem Content="Хип-хоп"/>
+                            <ComboBoxItem Content="Стрип"/>
+                        </ComboBox>
+                        <!-- Кнопка "Добавить" с выравниванием по правому краю -->
+                        <Button Content="Добавить" Margin="10" HorizontalAlignment="Right" Width="80" Click="Button_Click_1"/>
+                    </StackPanel>
+
+
+
+                    <!-- Таблица с клиентами (контейнер для карточек клиентов) -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10">
+                        <StackPanel>
+                            <!-- Названия столбцов -->
+                            <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Первый столбец - Название "Фото" -->
+                                    <TextBlock Text="Фото" FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center"/>
+                                    <!-- Второй столбец - Название "ФИО" -->
+                                    <TextBlock Text="ФИО" FontWeight="Bold" Style="{StaticResource NameStyle}" Grid.Column="1"/>
+                                    <TextBlock Text="Дата рождения" FontWeight="Bold" Style="{StaticResource NameStyle}" Grid.Column="2"/>
+                                    <!-- Третий столбец - Название "Тип группы" -->
+                                    <TextBlock Text="Тип группы" FontWeight="Bold" Style="{StaticResource NameStyle}" Grid.Column="3"/>
+                                    <!-- Четвертый столбец - Название "Вид танца" -->
+                                    <TextBlock Text="Вид танца" FontWeight="Bold" Style="{StaticResource NameStyle}" Grid.Column="4"/>
+                                    <TextBlock Text="Телефон" FontWeight="Bold" Style="{StaticResource NameStyle}" Grid.Column="5"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Карточка клиента 1 (и остальные карточки) -->
+                            <!-- Карточка клиента 1 (и остальные карточки) -->
+                            <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Пятый столбец занимает оставшееся пространство -->
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <Image Width="50" Height="50">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="https://i.pinimg.com/originals/c3/dd/58/c3dd58e7e25e4c53f05930019b989221.png" />
+                                        </Image.Source>
+                                    </Image>
+                                    <!-- Второй столбец - Имя клиента -->
+                                    <TextBlock Text="Иванива Мария В." FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <TextBlock Text="01.01.2000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="2"/>
+                                    <!-- Третий столбец - Тип группы клиента -->
+                                    <TextBlock Text="Индивидуальное" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="3"/>
+                                    <!-- Четвертый столбец - Вид танца клиента -->
+                                    <TextBlock Text="Бальные" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="4"/>
+                                    <TextBlock Text="89000000000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="5"/>
+                                </Grid>
+                            </Border>
+                            <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Пятый столбец занимает оставшееся пространство -->
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <Image Width="50" Height="50">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="https://i.pinimg.com/originals/c3/dd/58/c3dd58e7e25e4c53f05930019b989221.png" />
+                                        </Image.Source>
+                                    </Image>
+                                    <!-- Второй столбец - Имя клиента -->
+                                    <TextBlock Text="Иванива Мария В." FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <TextBlock Text="01.01.2000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="2"/>
+                                    <!-- Третий столбец - Тип группы клиента -->
+                                    <TextBlock Text="Индивидуальное" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="3"/>
+                                    <!-- Четвертый столбец - Вид танца клиента -->
+                                    <TextBlock Text="Бальные" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="4"/>
+                                    <TextBlock Text="89000000000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="5"/>
+                                </Grid>
+                            </Border>
+                            <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Пятый столбец занимает оставшееся пространство -->
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <Image Width="50" Height="50">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="https://i.pinimg.com/originals/c3/dd/58/c3dd58e7e25e4c53f05930019b989221.png" />
+                                        </Image.Source>
+                                    </Image>
+                                    <!-- Второй столбец - Имя клиента -->
+                                    <TextBlock Text="Иванива Мария В." FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <TextBlock Text="01.01.2000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="2"/>
+                                    <!-- Третий столбец - Тип группы клиента -->
+                                    <TextBlock Text="Индивидуальное" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="3"/>
+                                    <!-- Четвертый столбец - Вид танца клиента -->
+                                    <TextBlock Text="Бальные" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="4"/>
+                                    <TextBlock Text="89000000000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="5"/>
+                                </Grid>
+                            </Border>
+                            <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Пятый столбец занимает оставшееся пространство -->
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <Image Width="50" Height="50">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="https://i.pinimg.com/originals/c3/dd/58/c3dd58e7e25e4c53f05930019b989221.png" />
+                                        </Image.Source>
+                                    </Image>
+                                    <!-- Второй столбец - Имя клиента -->
+                                    <TextBlock Text="Иванива Мария В." FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <TextBlock Text="01.01.2000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="2"/>
+                                    <!-- Третий столбец - Тип группы клиента -->
+                                    <TextBlock Text="Индивидуальное" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="3"/>
+                                    <!-- Четвертый столбец - Вид танца клиента -->
+                                    <TextBlock Text="Бальные" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="4"/>
+                                    <TextBlock Text="89000000000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="5"/>
+                                </Grid>
+                            </Border>
+                            <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="20">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Пятый столбец занимает оставшееся пространство -->
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <!-- Первый столбец - Фотография клиента -->
+                                    <Image Width="50" Height="50">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="https://i.pinimg.com/originals/c3/dd/58/c3dd58e7e25e4c53f05930019b989221.png" />
+                                        </Image.Source>
+                                    </Image>
+                                    <!-- Второй столбец - Имя клиента -->
+                                    <TextBlock Text="Иванива Мария В." FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <TextBlock Text="01.01.2000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="2"/>
+                                    <!-- Третий столбец - Тип группы клиента -->
+                                    <TextBlock Text="Индивидуальное" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="3"/>
+                                    <!-- Четвертый столбец - Вид танца клиента -->
+                                    <TextBlock Text="Бальные" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="4"/>
+                                    <TextBlock Text="89000000000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="5"/>
+                                </Grid>
+                            </Border>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

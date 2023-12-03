@@ -1,0 +1,28 @@
+﻿<Window x:Class="rpm.autorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:rpm"
+        mc:Ignorable="d"
+        Title="autorization" Height="1024" Width="1440">
+    <Grid>
+        <Border BorderBrush="#FF9083EF" BorderThickness="10" CornerRadius="10" Padding="20" Margin="80">
+            <Grid Height="225.56">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Логин:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" FontSize="16" FontFamily="Bookman Old Style" FontWeight="Bold"/>
+                <TextBox Grid.Row="0" Margin="120,0,10,0" BorderBrush="#FF8713EC" FontSize="16" FontFamily="Bookman Old Style" SelectionBrush="#FFDEA663"/>
+
+                <Label Content="Пароль:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,40,0,0" Grid.Row="1" FontSize="16" FontWeight="Bold" FontFamily="Bookman Old Style"/>
+                <PasswordBox Grid.Row="1" Margin="120,40,10,0" BorderBrush="#FF8713EC" FontSize="16" FontFamily="Bookman Old Style" SelectionBrush="#FFDEA663" Height="48.78"/>
+
+                <Button Grid.Row="2" Content="Войти" Width="140" Height="40" Margin="110,20,10,0" FontSize="16" FontFamily="Bookman Old Style" FontWeight="Bold" BorderBrush="#FF8713EC" Background="#FFECAE63" Click="Button_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
