@@ -1,6 +1,7 @@
 ﻿using Microsoft.OData.Edm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,20 +18,18 @@ using static rpm.raspisanie;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для Client.xaml
-    /// </summary>
     public partial class Client : Window
     {
         public Client()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
             NewData();
         }
         private void NewData()
         {           
             table1.Items.Clear();
-            using (var db = new PROEKTEntities4())
+            using (var db = new PROEKTEntities6())
             {
                 foreach (var f in db.Clients)
                 {
@@ -62,7 +61,35 @@ namespace rpm
             {
                 Editclient editclient2 = new Editclient(path);
                 editclient2.Show();
+                this.Close();
             }
+        }
+        private int _id_Client;
+        private string _surname;
+        private string _firstName;
+        private string _patronymic;
+        private string _phoneNumber;
+
+        public int Id_Client
+        {
+            get { return _id_Client; }
+            set
+            {
+                if (_id_Client != value)
+                {
+                    _id_Client = value;
+                    OnPropertyChanged(nameof(Id_Client));
+                }
+            }
+        }
+
+        // Добавьте аналогичные свойства с реализацией OnPropertyChanged для других полей
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

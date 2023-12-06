@@ -40,7 +40,7 @@
           </Key>
           <Property Name="Id_Class" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DateClass" Type="date" Nullable="false" />
-          <Property Name="TimeClass" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NumberOfSeats" Type="int" Nullable="false" />
           <Property Name="IdDirection" Type="int" />
@@ -65,20 +65,6 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
           <Property Name="IdDirection" Type="int" />
         </EntityType>
-        <Association Name="FK__Schedule__IdDire__5070F446">
-          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Direction">
-              <PropertyRef Name="Id_Dir" />
-            </Principal>
-            <Dependent Role="Schedule">
-              <PropertyRef Name="IdDirection" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ScheduleC__IdCla__151B244E">
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
           <End Role="ScheduleClient" Type="Self.ScheduleClient" Multiplicity="*" />
@@ -124,10 +110,6 @@
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScheduleClient" EntityType="Self.ScheduleClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treners" EntityType="Self.Treners" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Schedule__IdDire__5070F446" Association="Self.FK__Schedule__IdDire__5070F446">
-            <End Role="Direction" EntitySet="Direction" />
-            <End Role="Schedule" EntitySet="Schedule" />
-          </AssociationSet>
           <AssociationSet Name="FK__ScheduleC__IdCla__151B244E" Association="Self.FK__ScheduleC__IdCla__151B244E">
             <End Role="Schedule" EntitySet="Schedule" />
             <End Role="ScheduleClient" EntitySet="ScheduleClient" />
@@ -175,7 +157,6 @@
           </Key>
           <Property Name="Id_Dir" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameDir" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__IdDire__5070F446" FromRole="Direction" ToRole="Schedule" />
           <NavigationProperty Name="Treners" Relationship="Self.FK__Treners__IdDirec__4CA06362" FromRole="Direction" ToRole="Treners" />
         </EntityType>
         <EntityType Name="Schedule">
@@ -184,11 +165,10 @@
           </Key>
           <Property Name="Id_Class" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateClass" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TimeClass" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Time" Type="Time" Precision="7" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumberOfSeats" Type="Int32" Nullable="false" />
           <Property Name="IdDirection" Type="Int32" />
-          <NavigationProperty Name="Direction" Relationship="Self.FK__Schedule__IdDire__5070F446" FromRole="Schedule" ToRole="Direction" />
           <NavigationProperty Name="ScheduleClient" Relationship="Self.FK__ScheduleC__IdCla__151B244E" FromRole="Schedule" ToRole="ScheduleClient" />
         </EntityType>
         <EntityType Name="ScheduleClient">
@@ -226,20 +206,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Schedule__IdDire__5070F446">
-          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Direction">
-              <PropertyRef Name="Id_Dir" />
-            </Principal>
-            <Dependent Role="Schedule">
-              <PropertyRef Name="IdDirection" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Treners__IdDirec__4CA06362">
           <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -266,7 +232,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PROEKTEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PROEKTEntities6" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admins" />
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="Direction" EntityType="Self.Direction" />
@@ -276,10 +242,6 @@
           <AssociationSet Name="FK__ScheduleC__IdCli__160F4887" Association="Self.FK__ScheduleC__IdCli__160F4887">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="ScheduleClient" EntitySet="ScheduleClient" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Schedule__IdDire__5070F446" Association="Self.FK__Schedule__IdDire__5070F446">
-            <End Role="Direction" EntitySet="Direction" />
-            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
           <AssociationSet Name="FK__Treners__IdDirec__4CA06362" Association="Self.FK__Treners__IdDirec__4CA06362">
             <End Role="Direction" EntitySet="Direction" />
@@ -295,7 +257,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PROEKTModelContainer" CdmEntityContainer="PROEKTEntities4">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PROEKTModelContainer" CdmEntityContainer="PROEKTEntities6">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="PROEKTModel.Admins">
               <MappingFragment StoreEntitySet="Admins">
@@ -333,7 +295,7 @@
               <MappingFragment StoreEntitySet="Schedule">
                 <ScalarProperty Name="Id_Class" ColumnName="Id_Class" />
                 <ScalarProperty Name="DateClass" ColumnName="DateClass" />
-                <ScalarProperty Name="TimeClass" ColumnName="TimeClass" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
                 <ScalarProperty Name="IdDirection" ColumnName="IdDirection" />

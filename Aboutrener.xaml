@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
-        mc:Ignorable="d"
-      
-        Title="Aboutrener"  Height="1024" Width="1440">
+        mc:Ignorable="d" Icon="/log.png"
+        Title="О тренере"  Height="1024" Width="1440">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -42,7 +41,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock Text="Направление: " Style="{StaticResource NameStyle}" />
-                            <TextBlock x:Name="IdDirection" Text="Балет" Style="{StaticResource NameStyle}" />
+                            <TextBlock x:Name="IdDirection" Text="" Style="{StaticResource NameStyle}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <TextBlock Text="Телефон: " Style="{StaticResource NameStyle}" />

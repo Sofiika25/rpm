@@ -31,6 +31,7 @@ namespace rpm
             Surname.Text = clients.Surname;
             Patronymic.Text = clients.Patronymic;
             PhoneNumber.Text = clients.PhoneNumber;
+            this.WindowState = WindowState.Maximized;
         }
 
        
@@ -38,7 +39,7 @@ namespace rpm
         {
             if (FirstName.Text.Trim() != "" && Surname.Text.Trim() != "" && Patronymic.Text.Trim() != "" && PhoneNumber.Text.Trim() != "")
             {
-                using (PROEKTEntities4 db = new PROEKTEntities4())
+                using (PROEKTEntities6 db = new PROEKTEntities6())
                 {
                     try
                     {
@@ -57,7 +58,8 @@ namespace rpm
                         f.PhoneNumber = PhoneNumber.Text;
                         db.SaveChanges();
                         System.Windows.MessageBox.Show("Сохранено");
-                       
+                        Client client = new Client();
+                        client.Show();
                         this.Close();
                     }
                     catch
@@ -75,7 +77,7 @@ namespace rpm
             MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить этого клиента?", "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
             if (r == MessageBoxResult.Yes)
             {
-                using (PROEKTEntities4 db = new PROEKTEntities4())
+                using (PROEKTEntities6 db = new PROEKTEntities6())
                 {
                     Clients f = null;
                     foreach (var en in db.Clients)
@@ -92,14 +94,15 @@ namespace rpm
                         if (sp.IdClient == f.Id_Client)
                         {
                             scheduleClient = db.ScheduleClient.Find(sp.IdClient);
-                            
+
                             db.ScheduleClient.Remove(scheduleClient);
                         }
                     }
                     db.Clients.Remove(f);
                     db.SaveChanges();
                     System.Windows.MessageBox.Show("Успешно удалено");
-                   
+                    Client client = new Client();
+                        client.Show();
                     this.Close();
                 }
             }

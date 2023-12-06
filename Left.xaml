@@ -8,7 +8,6 @@
              d:DesignHeight="924" d:DesignWidth="300">
     <Border Background="#EEE" Grid.Column="0" Height="924" Width="300" Margin="0">
         <StackPanel Margin="20">
-            <Button Content="Администратор" Style="{StaticResource ButtonPanelStyle}"/>
             <Button Content="Клиент" Style="{StaticResource ButtonPanelStyle}" Click="ClientButton_Click" />
             <Button Content="Сотрудник" Style="{StaticResource ButtonPanelStyle}" Click="TrenerButton_Click"/>
             <Button Content="Расписание" Style="{StaticResource ButtonPanelStyle}" Click="RaspisanieButton_Click"/>

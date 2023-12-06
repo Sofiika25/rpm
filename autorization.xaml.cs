@@ -22,6 +22,7 @@ namespace rpm
         public autorization()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,7 +51,7 @@ namespace rpm
         }
         private bool AuthenticateUser(string login, string password)
         {
-            using (PROEKTEntities4 db = new PROEKTEntities4())
+            using (PROEKTEntities6 db = new PROEKTEntities6())
             {
                 var user = db.Admins.FirstOrDefault(u => u.LoginA == login && u.PasswordA == password);
 

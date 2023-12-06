@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
-        mc:Ignorable="d"
-        
-        Title="autorization" Height="1024" Width="1440">
+        mc:Ignorable="d" Icon="/log.png"
+        Title="Авторизация" Height="1024" Width="1440">
     <Border BorderBrush="#FF9083EF" BorderThickness="10" CornerRadius="10" Padding="20" Margin="80">
         <Grid VerticalAlignment="Center">
            

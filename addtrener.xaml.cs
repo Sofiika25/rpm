@@ -16,23 +16,22 @@ using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для addtrener.xaml
-    /// </summary>
+   
     public partial class addtrener : Window
     {
         byte[] photo = null;
         public addtrener()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            autorization autorization = new autorization();
-            autorization.Show();
-            this.Close();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    autorization autorization = new autorization();
+        //    autorization.Show();
+        //    this.Close();
+        //}
 
         private void Photo_Click(object sender, RoutedEventArgs e)
         {
@@ -56,7 +55,7 @@ namespace rpm
         {
             try
             {
-                using (PROEKTEntities4 db = new PROEKTEntities4())
+                using (PROEKTEntities6 db = new PROEKTEntities6())
                 {
                     if (Surname.Text.Trim() != "" && FirstName.Text.Trim() != "" && Patronymic.Text.Trim() != "" && Photo != null && PhoneNumber.Text.Trim() != "" && int.Parse(IdDirection.Text.Trim()) != null)
                     {
@@ -71,7 +70,7 @@ namespace rpm
                                 PhoneNumber = PhoneNumber.Text,
                                 IdDirection = int.Parse(IdDirection.Text)
                             };
-                            db.Treners.Add(treners);
+                            db.Treners.Add(treners);                            
                             db.SaveChanges();
                             MessageBox.Show("Успешно добавлено");
 

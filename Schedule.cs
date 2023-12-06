@@ -11,7 +11,6 @@ namespace rpm
 {
     using System;
     using System.Collections.Generic;
-    
     public partial class Schedule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,18 +18,16 @@ namespace rpm
         {
             this.ScheduleClient = new HashSet<ScheduleClient>();
         }
-    
+        public string DirectionName { get; set; }
         public int Id_Class { get; set; }
         public System.DateTime DateClass { get; set; }
-        public System.TimeSpan TimeClass { get; set; }
+        public Nullable<System.TimeSpan> Time { get; set; }
         public string Type { get; set; }
         public int NumberOfSeats { get; set; }
         public Nullable<int> IdDirection { get; set; }
     
-        public virtual Direction Direction { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleClient> ScheduleClient { get; set; }
-
         
     }
 }

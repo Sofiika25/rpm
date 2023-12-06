@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,6 +26,7 @@ namespace rpm
         public raspisanie()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
             NewData();
         }
 
@@ -59,32 +61,93 @@ namespace rpm
         private void NewData()
         {
             table.Items.Clear();
-            using (var db = new PROEKTEntities4())
+            using (var db = new PROEKTEntities6())
             {
                 foreach (var f in db.Schedule)
                 {
-                    table.Items.Add(new Schedule { DateClass = f.DateClass, TimeClass = f.TimeClass, Type = f.Type, IdDirection = f.IdDirection });
+                    table.Items.Add(new Schedule { DateClass = f.DateClass, Time = f.Time, Type = f.Type, IdDirection = f.IdDirection });
 
                 }
             }
+            //table.Items.Clear();
+            //using (var db = new PROEKTEntities6())
+            //{
+            //    var scheduleData = from s in db.Schedule join d in db.Direction on s.IdDirection equals d.Id_Dir select new Schedule
+            //                       {
+            //                           DateClass = s.DateClass,
+            //                           Time = s.Time,
+            //                           Type = s.Type,
+            //                           DirectionName = d.NameDir
+            //                       };
+
+            //    foreach (var scheduleItem in scheduleData)
+            //    {
+            //        table.Items.Add(scheduleItem);
+            //    }
+            //}
+            //using (var db = new PROEKTEntities6())
+            //{
+            //    foreach (var f in db.Schedule)
+            //    {
+            //        // Загрузка объекта направления
+            //        var direction = db.Direction.FirstOrDefault(d => d.Id_Dir == f.IdDirection);
+
+            //        // Создание нового объекта Schedule с использованием наименования направления
+            //        var scheduleItem = new Schedule
+            //        {
+            //            DateClass = f.DateClass,
+            //            Time = f.Time,
+            //            Type = f.Type,
+            //            IdDirection = direction?.NameDir // Проверка на null для избежания ошибок
+            //        };
+
+            //        table.Items.Add(scheduleItem);
+            //    }
+            //}
         }
-        //public class DataItem
-        //{
-        //    public Date DateClass { get; set; }
-        //    public TimeSpan TimeClass { get; set; }
-        //    public string Type { get; set; }
-        //    public int IdDirection { get; set; }
-        //}
+       
 
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            AddClass addClass = new AddClass();
+            addClass.Show();
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить это занятие?", "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
+            if (r == MessageBoxResult.Yes)
+            {
+                if (table.SelectedItem != null && table.SelectedItem is Schedule selectedSchedule)
+                {
+                    using (var db = new PROEKTEntities6())
+                    {
+                        var scheduleToDelete = db.Schedule.FirstOrDefault(s =>
+                            s.DateClass == selectedSchedule.DateClass &&
+                            s.Time == selectedSchedule.Time &&
+                            s.Type == selectedSchedule.Type &&
+                            s.IdDirection == selectedSchedule.IdDirection);
+
+                        if (scheduleToDelete != null)
+                        {
+                            var relatedScheduleClients = db.ScheduleClient.Where(sc => sc.IdClass == scheduleToDelete.Id_Class);
+                            db.ScheduleClient.RemoveRange(relatedScheduleClients);
+                            db.Schedule.Remove(scheduleToDelete);
+                            db.SaveChanges();
+                            table.Items.Remove(selectedSchedule);
+                        }
+                    }
+
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Выберите запись для удаления.");
+                }
+            }
+               
         }
     }
 }

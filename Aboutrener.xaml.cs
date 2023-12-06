@@ -24,12 +24,13 @@ namespace rpm
         public Aboutrener(Treners treners)
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
             this.treners = treners;
             NewData();
         }
         public void NewData()
         {
-            using (PROEKTEntities4 db = new PROEKTEntities4())
+            using (PROEKTEntities6 db = new PROEKTEntities6())
             {
                 foreach (var e in db.Treners)
                 {
@@ -39,6 +40,9 @@ namespace rpm
                         FirstName.Text = e.FirstName;
                         Patronymic.Text = e.Patronymic;
                         PhoneNumber.Text = e.PhoneNumber;
+                        //IdDirection.Text = e.IdDirection.ToString();
+                        var direction = db.Direction.FirstOrDefault(d => d.Id_Dir == e.IdDirection);
+                        IdDirection.Text = direction?.NameDir; // 
                         MemoryStream stream = new MemoryStream(e.Photo);
                         Photo.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                     }
@@ -49,7 +53,7 @@ namespace rpm
         {
             EditTrener editTrener = new EditTrener(treners);
             editTrener.Show();
-            
+            this.Close();
         }
 
     }

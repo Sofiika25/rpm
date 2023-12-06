@@ -13,20 +13,13 @@ namespace rpm
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PROEKTEntities4 : DbContext
+    public partial class PROEKTEntities6 : DbContext
     {
-        private static PROEKTEntities4 _context;
-        public PROEKTEntities4()
-            : base("name=PROEKTEntities4")
+        public PROEKTEntities6()
+            : base("name=PROEKTEntities6")
         {
         }
-        public static PROEKTEntities4 GetContext()
-        {
-            if( _context == null )
-                _context = new PROEKTEntities4();
-            return _context;
-        }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

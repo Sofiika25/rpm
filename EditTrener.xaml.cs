@@ -34,14 +34,16 @@ namespace rpm
             PhoneNumber.Text = treners.PhoneNumber;
             IdDirection.Text = treners.IdDirection.ToString();
             photo = treners.Photo;
+            this.WindowState = WindowState.Maximized;
         }
+
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Photo.Text == "Успешно загружено")
-            {
+            //if (Photo.Text == "Успешно загружено")
+            //{
                 if (FirstName.Text.Trim() != "" && Surname.Text.Trim() != "" && Patronymic.Text.Trim() != "" && PhoneNumber.Text.Trim() != "" && IdDirection.Text.Trim() != "")
                 {
-                    using (PROEKTEntities4 db = new PROEKTEntities4())
+                    using (PROEKTEntities6 db = new PROEKTEntities6())
                     {
                         try
                         {
@@ -58,11 +60,12 @@ namespace rpm
                             f.Surname = Surname.Text;
                             f.Patronymic = Patronymic.Text;
                             f.PhoneNumber = PhoneNumber.Text;
-                            f.Photo = photo;
+                            //f.Photo = photo;
                             db.SaveChanges();
                             System.Windows.MessageBox.Show("Сохранено");
-
-                            this.Close();
+                        Aboutrener aboutrener = new Aboutrener(treners);
+                        aboutrener.Show();
+                        this.Close();
                         }
                         catch
                         {
@@ -72,32 +75,34 @@ namespace rpm
                 }
                 else
                     System.Windows.MessageBox.Show("Не все поля заполнены");
-            }
-                
+            
+            
+            //}
+
         }
-        private void Photo_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF; *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG | All files(*.*) | *.* ";
-            if ((bool)openFileDialog.ShowDialog())
-            {
-                try
-                {
-                    this.photo = File.ReadAllBytes(openFileDialog.FileName);
-                    Photo.Text = "Успешно загружено";
-                }
-                catch
-                {
-                    Photo.Text = "Ошибка";
-                }
-            }
-        }
+        //private void Photo_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+        //    openFileDialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF; *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG | All files(*.*) | *.* ";
+        //    if ((bool)openFileDialog.ShowDialog())
+        //    {
+        //        try
+        //        {
+        //            this.photo = File.ReadAllBytes(openFileDialog.FileName);
+        //            Photo.Text = "Успешно загружено";
+        //        }
+        //        catch
+        //        {
+        //            Photo.Text = "Ошибка";
+        //        }
+        //    }
+        //}
         private void DelButton_Click_1(object sender, RoutedEventArgs e)
         {
             MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить этого тренера?", "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
             if (r == MessageBoxResult.Yes)
             {
-                using (PROEKTEntities4 db = new PROEKTEntities4())
+                using (PROEKTEntities6 db = new PROEKTEntities6())
                 {
                     Treners f = null;
                     foreach (var en in db.Treners)
@@ -113,7 +118,10 @@ namespace rpm
                     db.SaveChanges();
                     System.Windows.MessageBox.Show("Успешно удалено");
 
-                   
+                    //Aboutrener aboutrener = new Aboutrener(treners);
+                    //aboutrener.Close();
+                    Treners2 treners2 = new Treners2();
+                    treners2.Show();
                     this.Close();
                 }
             }

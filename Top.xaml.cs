@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для Top.xaml
-    /// </summary>
+    
     public partial class Top : UserControl
     {
         public Top()

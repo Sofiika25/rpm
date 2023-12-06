@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для addclient.xaml
-    /// </summary>
     public partial class addclient : Window
     {
         private Clients _currentClients;
@@ -27,20 +24,21 @@ namespace rpm
           
                 _currentClients = selectedClient;
             DataContext = _currentClients;
+            this.WindowState = WindowState.Maximized;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            autorization autorization = new autorization();
-            autorization.Show();
-            this.Close();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    autorization autorization = new autorization();
+        //    autorization.Show();
+        //    this.Close();
+        //}
 
         private void AddButton_Click_1(object sender, RoutedEventArgs e)
         {
             try
             {
-                using(PROEKTEntities4 db = new PROEKTEntities4())
+                using(PROEKTEntities6 db = new PROEKTEntities6())
                 {
                     if (Surname.Text.Trim() != "" && FirstName.Text.Trim() != "" && Patronymic.Text.Trim() !="" && PhoneNumber.Text.Trim() !="")
                     {
