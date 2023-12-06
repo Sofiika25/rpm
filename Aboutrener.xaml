@@ -5,205 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d"
+      
         Title="Aboutrener"  Height="1024" Width="1440">
-    <Window.Resources>
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <WrapPanel Grid.Row="0" Grid.ColumnSpan="2" Height="100" Width="auto" Background="BurlyWood">
-            <Grid Width="auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="54"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="1084"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Image  Grid.Column="0" Margin="70,31,10,45" Source="C:\Users\Zukhr\Downloads\icons8-пользователь-мужчина-в-кружке.gif" RenderTransformOrigin="0.968,0.5" />
-                <TextBlock  Grid.Column="1" FontSize="16" FontFamily="Inter" Grid.ColumnSpan="2" Margin="0,36,1038,41" ><Run Text="Личный кабинет"  /></TextBlock>
-                <Button  Grid.Column="2" Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1046,0,0,0" Height="39" Width="110" Click="Button_Click" >
-                </Button>
-            </Grid>
+        <WrapPanel>
+            <local:Top></local:Top>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-
-            <!--<Border Background="#EEE" Grid.Column="0" Height="924" Width="290" Margin="0">
-                <StackPanel Margin="20">
-                    <Button Content="Администратор" Style="{StaticResource ButtonPanelStyle}" Click="Button_Click_1" />
-                    <Button Content="Клиент" Style="{StaticResource ButtonPanelStyle}" />
-                    <Button Content="Сотрудник" Style="{StaticResource ButtonPanelStyle}" FontWeight="Bold"/>
-                    <Button Content="Расписание" Style="{StaticResource ButtonPanelStyle}" />
-                </StackPanel>
-            </Border>-->
             <WrapPanel>
                 <local:Left></local:Left>
             </WrapPanel>
-            <!-- Главная панель -->
-            <Border Background="#FFF" Grid.Column="1" Width="1150" RenderTransformOrigin="0.357,0.523">
-                <WrapPanel Width="966" Margin="90,89,90,89">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+            <Border Background="#FFF" Width="1150" RenderTransformOrigin="0.357,0.523" Grid.ColumnSpan="2" Margin="290,0,0,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Width="200" Margin="10" x:Name="Photo"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Фамилия: " FontSize="18" FontWeight="Black" />
+                            <TextBlock x:Name="Surname" Text="Я" FontSize="18" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Имя: " FontSize="18" FontWeight="Black" />
+                            <TextBlock x:Name="FirstName" Text="я" FontSize="18" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Отчество: " FontSize="18" FontWeight="Black" />
+                            <TextBlock x:Name="Patronymic" Text="В" FontSize="18" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Направление: " Style="{StaticResource NameStyle}" />
+                            <TextBlock x:Name="IdDirection" Text="Балет" Style="{StaticResource NameStyle}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <TextBlock Text="Телефон: " Style="{StaticResource NameStyle}" />
+                            <TextBlock x:Name="PhoneNumber" Text="8900000000" Style="{StaticResource NameStyle }" />
 
-                        <Grid Margin="0,234,10,-164" Grid.RowSpan="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="407*" />
-                                <RowDefinition Height="13*"/>
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <TextBlock FontSize="24" FontWeight="Bold" FontFamily="inter" VerticalAlignment="Top" HorizontalAlignment="Left">Расписание</TextBlock>
-                                <StackPanel Orientation="Horizontal"  Grid.ColumnSpan="3">
-                                    <Button Content="На сегодня" Height="37" Width="140" />
-                                    <Button Content="На неделю" Margin="7" Height="37" Width="140" />
-                                    <Button Content="На месяц" Height="36" Width="140" Click="Button_Click"/>
-                                </StackPanel>
-                            </Grid>
-                            <!-- Панель с информацией о тренере -->
-                            <Grid Grid.Row="0" Margin="0,-288,0,288" Grid.ColumnSpan="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="10">
-                                    <Image Width="100" Height="100"  Source="C:\Users\1\Desktop\АААААААААААААААААААААААААААААААААААААААААААААААААААААААА\rpm\images\icons8-пользователь-мужчина-в-кружке.gif"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10">
-                                    <TextBlock Text="Иванов Иван Иванович" FontSize="18" FontWeight="Black" />
-                                    <TextBlock Text="Возраст: 30 лет" FontSize="18" />
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="10">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                            <Image Width="20" Height="20"/>
-                                            <TextBlock Text="Направление: " Style="{StaticResource NameStyle}" />
-                                            <TextBlock Text="Балет" Style="{StaticResource NameStyle}" />
-                                        </StackPanel>
-                                    </Grid>
-
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Width="20" Height="20"/>
-                                        <TextBlock Text="Телефон: " Style="{StaticResource NameStyle}" />
-                                        <TextBlock Text="8900000000" Style="{StaticResource NameStyle }" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                            </Grid>
-
-
-                            <!-- Панель с расписанием -->
-                            <Grid Grid.Row="1" Height="420" Width="966" Margin="0,0,-6,0" Grid.RowSpan="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="725*" />
-                                    <ColumnDefinition Width="38*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Кнопки переключения на сегодня, на неделю и кнопка добавить -->
-                                <StackPanel Orientation="Horizontal"  Margin="0,50,185,304" Grid.ColumnSpan="2"/>
-
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </WrapPanel>
+                        </StackPanel>
+                        <TextBlock Text="Редактировать профиль" FontWeight="Bold" TextDecorations="Underline" Style="{StaticResource NameStyle }"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30" MouseDown="TextBlock_MouseDown"/>
+                    </StackPanel>
+                </StackPanel>
             </Border>
-
-            <DataGrid Margin="88,436,96,50" AutoGenerateColumns="False"  Grid.Column="1">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Дата" Width="auto"/>
-                    <DataGridTextColumn Header="Время" Width="Auto" />
-                    <DataGridTextColumn Header="Направление" Width="300"/>
-                    <DataGridTextColumn Header="Тип занятия" Width="400" />
-                </DataGrid.Columns>
-            </DataGrid>
-
         </Grid>
     </Grid>
-
-    <!--<TextBlock Text="Email: ппр" FontSize="14" Foreground="Gray" Grid.Column="2" Margin="121,75,80,25" />
-    <TextBlock Text="Специальность: балет" FontSize="14" Foreground="Gray" RenderTransformOrigin="0.511,0.826" Grid.Column="2" Margin="98,-25,3,190" />-->
 </Window>            

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace rpm
 {
     /// <summary>
-    /// Логика взаимодействия для Left.xaml
+    /// Логика взаимодействия для Top.xaml
     /// </summary>
-    public partial class Left : UserControl
+    public partial class Top : UserControl
     {
-        public Left()
+        public Top()
         {
             InitializeComponent();
         }
@@ -32,23 +32,12 @@ namespace rpm
                 parentWindow.Close();
             }
         }
-        private void ClientButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Client client = new Client();
-            client.Show();
-            this.CloseWindow();
-        }
-        private void TrenerButton_Click(object sender, RoutedEventArgs e)
-        {
-            Treners2 treners2 = new Treners2();
-            treners2.Show();
-            this.CloseWindow();
-        }
+            autorization autorization = new autorization();
 
-        private void RaspisanieButton_Click(object sender, RoutedEventArgs e)
-        {
-            raspisanie raspisanie = new raspisanie();
-            raspisanie.Show();
+            // Открываем окно Window2
+            autorization.Show();
             this.CloseWindow();
         }
     }

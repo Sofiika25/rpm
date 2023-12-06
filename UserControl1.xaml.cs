@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace rpm
 {
     /// <summary>
-    /// Логика взаимодействия для Shedule.xaml
+    /// Логика взаимодействия для UserControl1.xaml
     /// </summary>
-    public partial class Shedule : Window
+    public partial class UserControl1 : UserControl
     {
-        public Shedule()
+        public UserControl1()
         {
             InitializeComponent();
         }

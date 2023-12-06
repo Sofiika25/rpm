@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d"
+        
         Title="Admin" Height="1024" Width="1440">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,18 +14,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="0" Grid.ColumnSpan="2" Height="100" Width="auto" Background="BurlyWood">
-            <Grid Width="auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="54"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="1084"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Image  Grid.Column="0" Margin="70,31,10,45" Source="C:\Users\Zukhr\Downloads\icons8-пользователь-мужчина-в-кружке.gif" RenderTransformOrigin="0.968,0.5" />
-                <TextBlock  Grid.Column="1" FontSize="16" FontFamily="Inter" Grid.ColumnSpan="2" Margin="0,36,1038,41" ><Run Text="Личный кабинет"  /></TextBlock>
-                <Button  Grid.Column="2" Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1046,0,0,0" Height="39" Width="110" >
-                </Button>
-            </Grid>
+
+        <WrapPanel>
+            <local:Top></local:Top>
         </WrapPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

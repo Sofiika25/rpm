@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.OData.Edm;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static rpm.raspisanie;
 
 namespace rpm
 {
@@ -22,55 +25,44 @@ namespace rpm
         public Client()
         {
             InitializeComponent();
+            NewData();
         }
-        private void ClientButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Создаем новый экземпляр Window2.xaml
-            Client client = new Client();
-
-            // Открываем окно Window2
-            client.Show();
-        }
-        //private void AdminButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    // Создаем новый экземпляр Window2.xaml
-        //    Treners window1 = new Treners();
-
-        //    // Открываем окно Window2
-        //    window1.Show();
-        //}
-        //private void MoreButton(object sender, RoutedEventArgs e)
-        //{
-        //    // Создаем новый экземпляр Window2.xaml
-        //    Window2 window2 = new Window2();
-
-        //    // Открываем окно Window2
-        //    window2.Show();
-        //}
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            autorization autorization = new autorization();
-
-            // Открываем окно Window2
-            autorization.Show();
-            this.Close();
+        private void NewData()
+        {           
+            table1.Items.Clear();
+            using (var db = new PROEKTEntities4())
+            {
+                foreach (var f in db.Clients)
+                {
+                    table1.Items.Add(new Clients { Id_Client = f.Id_Client, Surname = f.Surname, FirstName = f.FirstName, Patronymic = f.Patronymic, PhoneNumber = f.PhoneNumber });
+                   
+                }               
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            addclient addclient = new addclient();
+            addclient addclient = new addclient(null);
             addclient.Show();
             this.Close();
         }
 
-        private void TrenerButton_Click_2(object sender, RoutedEventArgs e)
+        private void EditButton_Click_1(object sender, RoutedEventArgs e)
         {
-            // Создаем новый экземпляр Window2.xaml
-            Treners window1 = new Treners();
 
-            // Открываем окно Window2
-            window1.Show();
+            Editclient editclient = new Editclient(null);
+            editclient.Show();
+
+        }
+
+        private void table1_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Clients path = table1.SelectedItem as Clients;
+            if (path != null)
+            {
+                Editclient editclient2 = new Editclient(path);
+                editclient2.Show();
+            }
         }
     }
 }

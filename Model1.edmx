@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PROEKTModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id_Admin" />
+          </Key>
+          <Property Name="Id_Admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="LoginA" Type="nvarchar" MaxLength="20" />
+          <Property Name="PasswordA" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id_Client" />
+          </Key>
+          <Property Name="Id_Client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="Id_Dir" />
+          </Key>
+          <Property Name="Id_Dir" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameDir" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id_Class" />
+          </Key>
+          <Property Name="Id_Class" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateClass" Type="date" Nullable="false" />
+          <Property Name="TimeClass" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOfSeats" Type="int" Nullable="false" />
+          <Property Name="IdDirection" Type="int" />
+        </EntityType>
+        <EntityType Name="ScheduleClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdClass" Type="int" />
+          <Property Name="IdClient" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Treners">
+          <Key>
+            <PropertyRef Name="Id_Trener" />
+          </Key>
+          <Property Name="Id_Trener" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="IdDirection" Type="int" />
+        </EntityType>
+        <Association Name="FK__Schedule__IdDire__5070F446">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id_Dir" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="IdDirection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__IdCla__151B244E">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="ScheduleClient" Type="Self.ScheduleClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="Id_Class" />
+            </Principal>
+            <Dependent Role="ScheduleClient">
+              <PropertyRef Name="IdClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__IdCli__160F4887">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="ScheduleClient" Type="Self.ScheduleClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id_Client" />
+            </Principal>
+            <Dependent Role="ScheduleClient">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Treners__IdDirec__4CA06362">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Treners" Type="Self.Treners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id_Dir" />
+            </Principal>
+            <Dependent Role="Treners">
+              <PropertyRef Name="IdDirection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PROEKTModelContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleClient" EntityType="Self.ScheduleClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Treners" EntityType="Self.Treners" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Schedule__IdDire__5070F446" Association="Self.FK__Schedule__IdDire__5070F446">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__IdCla__151B244E" Association="Self.FK__ScheduleC__IdCla__151B244E">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="ScheduleClient" EntitySet="ScheduleClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__IdCli__160F4887" Association="Self.FK__ScheduleC__IdCli__160F4887">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ScheduleClient" EntitySet="ScheduleClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Treners__IdDirec__4CA06362" Association="Self.FK__Treners__IdDirec__4CA06362">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="Treners" EntitySet="Treners" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PROEKTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id_Admin" />
+          </Key>
+          <Property Name="Id_Admin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoginA" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordA" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id_Client" />
+          </Key>
+          <Property Name="Id_Client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ScheduleClient" Relationship="Self.FK__ScheduleC__IdCli__160F4887" FromRole="Clients" ToRole="ScheduleClient" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="Id_Dir" />
+          </Key>
+          <Property Name="Id_Dir" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameDir" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__Schedule__IdDire__5070F446" FromRole="Direction" ToRole="Schedule" />
+          <NavigationProperty Name="Treners" Relationship="Self.FK__Treners__IdDirec__4CA06362" FromRole="Direction" ToRole="Treners" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id_Class" />
+          </Key>
+          <Property Name="Id_Class" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateClass" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeClass" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfSeats" Type="Int32" Nullable="false" />
+          <Property Name="IdDirection" Type="Int32" />
+          <NavigationProperty Name="Direction" Relationship="Self.FK__Schedule__IdDire__5070F446" FromRole="Schedule" ToRole="Direction" />
+          <NavigationProperty Name="ScheduleClient" Relationship="Self.FK__ScheduleC__IdCla__151B244E" FromRole="Schedule" ToRole="ScheduleClient" />
+        </EntityType>
+        <EntityType Name="ScheduleClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdClass" Type="Int32" />
+          <Property Name="IdClient" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__ScheduleC__IdCli__160F4887" FromRole="ScheduleClient" ToRole="Clients" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK__ScheduleC__IdCla__151B244E" FromRole="ScheduleClient" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Treners">
+          <Key>
+            <PropertyRef Name="Id_Trener" />
+          </Key>
+          <Property Name="Id_Trener" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdDirection" Type="Int32" />
+          <NavigationProperty Name="Direction" Relationship="Self.FK__Treners__IdDirec__4CA06362" FromRole="Treners" ToRole="Direction" />
+        </EntityType>
+        <Association Name="FK__ScheduleC__IdCli__160F4887">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="ScheduleClient" Type="Self.ScheduleClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id_Client" />
+            </Principal>
+            <Dependent Role="ScheduleClient">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__IdDire__5070F446">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id_Dir" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="IdDirection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Treners__IdDirec__4CA06362">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Treners" Type="Self.Treners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id_Dir" />
+            </Principal>
+            <Dependent Role="Treners">
+              <PropertyRef Name="IdDirection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__IdCla__151B244E">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="ScheduleClient" Type="Self.ScheduleClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="Id_Class" />
+            </Principal>
+            <Dependent Role="ScheduleClient">
+              <PropertyRef Name="IdClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PROEKTEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admins" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" />
+          <EntitySet Name="ScheduleClient" EntityType="Self.ScheduleClient" />
+          <EntitySet Name="Treners" EntityType="Self.Treners" />
+          <AssociationSet Name="FK__ScheduleC__IdCli__160F4887" Association="Self.FK__ScheduleC__IdCli__160F4887">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ScheduleClient" EntitySet="ScheduleClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__IdDire__5070F446" Association="Self.FK__Schedule__IdDire__5070F446">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Treners__IdDirec__4CA06362" Association="Self.FK__Treners__IdDirec__4CA06362">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="Treners" EntitySet="Treners" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__IdCla__151B244E" Association="Self.FK__ScheduleC__IdCla__151B244E">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="ScheduleClient" EntitySet="ScheduleClient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PROEKTModelContainer" CdmEntityContainer="PROEKTEntities4">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="PROEKTModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Id_Admin" ColumnName="Id_Admin" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LoginA" ColumnName="LoginA" />
+                <ScalarProperty Name="PasswordA" ColumnName="PasswordA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="PROEKTModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id_Client" ColumnName="Id_Client" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direction">
+            <EntityTypeMapping TypeName="PROEKTModel.Direction">
+              <MappingFragment StoreEntitySet="Direction">
+                <ScalarProperty Name="Id_Dir" ColumnName="Id_Dir" />
+                <ScalarProperty Name="NameDir" ColumnName="NameDir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="PROEKTModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Id_Class" ColumnName="Id_Class" />
+                <ScalarProperty Name="DateClass" ColumnName="DateClass" />
+                <ScalarProperty Name="TimeClass" ColumnName="TimeClass" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
+                <ScalarProperty Name="IdDirection" ColumnName="IdDirection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleClient">
+            <EntityTypeMapping TypeName="PROEKTModel.ScheduleClient">
+              <MappingFragment StoreEntitySet="ScheduleClient">
+                <ScalarProperty Name="IdClass" ColumnName="IdClass" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treners">
+            <EntityTypeMapping TypeName="PROEKTModel.Treners">
+              <MappingFragment StoreEntitySet="Treners">
+                <ScalarProperty Name="Id_Trener" ColumnName="Id_Trener" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IdDirection" ColumnName="IdDirection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

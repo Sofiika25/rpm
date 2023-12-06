@@ -5,109 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="raspisanie" Height="1024" Width="1440">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- Верхняя панель (Header) -->
-        <WrapPanel Grid.Row="0" Height="100" Width="Auto" Background="BurlyWood">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="54"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="1084"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Image  Grid.Column="0" Margin="70,31,10,45" Source="C:\Users\1\Desktop\проект\rpm\images\icons8-пользователь-мужчина-в-кружке.gif" RenderTransformOrigin="0.968,0.5" />
-                <TextBlock  Grid.Column="1" FontSize="16" FontFamily="Inter" Grid.ColumnSpan="2" Margin="0,36,1038,41" ><Run Text="Личный кабинет"  /></TextBlock>
-                <Button  Grid.Column="2" Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1046,0,0,0" Height="39" Width="110" >
-                </Button>
-            </Grid>
+        <WrapPanel>
+            <local:Top></local:Top>
         </WrapPanel>
-
-        <!-- Основная часть -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <!-- Левая панель (меню) -->
-            <!--<Border Grid.Column="0" Width="290" Height="Auto" Background="#EEE">
-                <StackPanel Margin="20">
-                    <Button Content="Администратор" Style="{StaticResource ButtonPanelStyle}" />
-                    <Button Content="Клиент"  Style="{StaticResource ButtonPanelStyle}" />
-                    <Button Content="Сотрудник" Style="{StaticResource ButtonPanelStyle}"/>
-                    <Button Content="Расписание" Style="{StaticResource ButtonPanelStyle}" FontWeight="Bold"/>
-                </StackPanel>
-            </Border>-->
             <WrapPanel>
                 <local:Left></local:Left>
             </WrapPanel>
-
-            <!-- Основная часть с календарем и записями -->
-            <!--<Border Grid.Column="1" Width="Auto" Background="#FFF">
+            <Border Grid.Column="1" Width="Auto" Background="#FFF">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
-                    --><!-- Поиск, Фильтры и Кнопка Добавить --><!--
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-                        --><!-- Кнопка "Поиск" --><!--
-                        <Button Content="Поиск" Margin="10"/>
-                        <ComboBox Width="150" Margin="10">
+                        <Button Content="Поиск" Margin="10" Width="60"/>
+                        <ComboBox Width="120" Margin="10">
                             <ComboBoxItem Content="Все группы"/>
-                            <ComboBoxItem Content="Индивидуальные"/>
-                            <ComboBoxItem Content="Групповые"/>
+                            <ComboBoxItem Content="Индивидуальное"/>
+                            <ComboBoxItem Content="Групповое"/>
                         </ComboBox>
-                        <ComboBox Width="150" Margin="10">
+                        <ComboBox Width="120" Margin="10">
                             <ComboBoxItem Content="Все танцы"/>
                             <ComboBoxItem Content="Бальные"/>
                             <ComboBoxItem Content="Хип-хоп"/>
-                            <ComboBoxItem Content="Стрип"/>
+                            <ComboBoxItem Content="Балет"/>
                         </ComboBox>
-                        --><!-- Кнопка "Добавить" с выравниванием по правому краю --><!--
-                        <Button Content="Добавить" Margin="10" HorizontalAlignment="Right"/>
+                        <Button Content="Добавить" Margin="10" HorizontalAlignment="Right" Width="80" Click="Button_Click"/>
                     </StackPanel>
-
-                    --><!-- Календарь --><!--
-                    <Calendar Grid.Row="1" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" FlowDirection="RightToLeft" FontSize="36" FontWeight="Bold">
-                        <Calendar.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFE4EAF0"/>
-                                <GradientStop Color="#FFECF0F4" Offset="0.16"/>
-                                <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
-                                <GradientStop Color="White" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Calendar.Background>
-                    </Calendar>
+                    <StackPanel Grid.Row="1">
+                        <DataGrid x:Name="table" Margin="20" HeadersVisibility="Column" AutoGenerateColumns="False"  Grid.Column="1" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Дата" Width="100" Binding="{Binding DateClass}"/>
+                                <DataGridTextColumn Header="Время" Width="100" Binding="{Binding TimeClass}"/>
+                                <DataGridTextColumn Header="Тип занятия" Width="*" Binding="{Binding Type}"/>
+                                <DataGridTextColumn Header="Направление" Width="*" Binding="{Binding IdDirection}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                     
-
-                    --><!-- Записи --><!--
-                    <StackPanel Grid.Row="1" Margin="10">
-                        --><!-- Здесь можно добавить элементы управления для отображения и добавления записей в календарь --><!--
-                    </StackPanel>
-
                 </Grid>
-            </Border>-->
-            <DataGrid x:Name="table" Margin="20" HeadersVisibility="Column" AutoGenerateColumns="False"  Grid.Column="1" IsReadOnly="True"> 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Дата" Width="auto" Binding="{Binding Date}"/>
-                    <DataGridTextColumn Header="Время" Width="Auto" Binding="{Binding Time}"/>
-                    <DataGridTextColumn Header="Направление" Width="300" Binding="{Binding Napravlenie}"/>
-                    <DataGridTextColumn Header="Тип занятия" Width="400" Binding="{Binding Type}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            </Border>
         </Grid>
     </Grid>
 </Window>

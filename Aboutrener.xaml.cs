@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,44 +20,37 @@ namespace rpm
     /// </summary>
     public partial class Aboutrener : Window
     {
-        public Aboutrener()
+        Treners treners;
+        public Aboutrener(Treners treners)
         {
             InitializeComponent();
+            this.treners = treners;
+            NewData();
         }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void NewData()
         {
-
+            using (PROEKTEntities4 db = new PROEKTEntities4())
+            {
+                foreach (var e in db.Treners)
+                {
+                    if (e.Id_Trener == treners.Id_Trener)
+                    {
+                        Surname.Text = e.Surname;
+                        FirstName.Text = e.FirstName;
+                        Patronymic.Text = e.Patronymic;
+                        PhoneNumber.Text = e.PhoneNumber;
+                        MemoryStream stream = new MemoryStream(e.Photo);
+                        Photo.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                    }
+                }
+            }
         }
-        private void ClientButton_Click(object sender, RoutedEventArgs e)
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Создаем новый экземпляр Window2.xaml
-            Client client = new Client();
-
-            // Открываем окно Window2
-            client.Show();
-        }
-        private void AdminButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Создаем новый экземпляр Window2.xaml
-            Treners window1 = new Treners();
-
-            // Открываем окно Window2
-            window1.Show();
+            EditTrener editTrener = new EditTrener(treners);
+            editTrener.Show();
+            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            autorization autorization = new autorization();
-
-            // Открываем окно Window2
-            autorization.Show();
-            this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

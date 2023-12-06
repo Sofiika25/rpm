@@ -105,5 +105,31 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,10,0,0" />
         </Style>
+        <Style x:Key="LabelAutoriz" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Bookman Old Style"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="TBAutoriz" TargetType="TextBox">
+            <Setter Property="Margin" Value="120,0,10,0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Bookman Old Style"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="#FF8713EC"/>
+            <Setter Property="SelectionBrush" Value="#FFDEA663"/>
+            <Setter Property="Height" Value="32"/>
+        </Style>
+        <Style x:Key="PasAutoriz" TargetType="PasswordBox">
+            <Setter Property="Margin" Value="120,0,10,0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Bookman Old Style"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="#FF8713EC"/>
+            <Setter Property="SelectionBrush" Value="#FFDEA663"/>
+            <Setter Property="Height" Value="32"/>
+        </Style>
     </Application.Resources>
 </Application>

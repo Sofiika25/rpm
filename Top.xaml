@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="rpm.Top"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:rpm"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="1440">
+    <WrapPanel Grid.Row="0" Height="100" Width="1440" Background="BurlyWood">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" MinWidth="54"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" MinWidth="1084"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image  Grid.Column="0" Margin="70,31,10,45" Source="C:\Users\1\Desktop\АААААААААААААААААААААААААААААААААААААААААААААААААААААААА\rpm\images\icons8-пользователь-мужчина-в-кружке.gif" RenderTransformOrigin="0.968,0.5" />
+            <TextBlock  Grid.Column="1" FontSize="16" FontFamily="Inter" Grid.ColumnSpan="2" Margin="0,36,1038,41" ><Run Text="Личный кабинет"  /></TextBlock>
+            <Button  Grid.Column="2" Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1046,0,0,0" Height="39" Width="110" Click="Button_Click" >
+            </Button>
+        </Grid>
+
+    </WrapPanel>
+</UserControl>
