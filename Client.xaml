@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d" 
         Icon="/log.png"      
-        Title="Клиенты"  Height="1024" Width="1440">
+        Title="Клиенты"  MinHeight="700" MinWidth="1240">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,10 +30,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-                        <Button Content="Добавить клиента" Margin="10" HorizontalAlignment="Right" Width="200" Click="Button_Click_1"/>
+                        <Button Content="Добавить клиента" Margin="10" HorizontalAlignment="Right" Width="200" 
+                                Click="Button_Click_1"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1">
-                        <DataGrid x:Name="table1" MouseUp="table1_MouseUp" Margin="20" HeadersVisibility="Column" AutoGenerateColumns="False"  Grid.Column="1" IsReadOnly="True">
+                        <DataGrid x:Name="table1" MouseUp="table1_MouseUp" Margin="20" HeadersVisibility="Column"
+                                  AutoGenerateColumns="False"  Grid.Column="1" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Номер" Width="200" Binding="{Binding Id_Client}"/>
                                 <DataGridTextColumn Header="Фамилия" Width="200" Binding="{Binding Surname}"/>

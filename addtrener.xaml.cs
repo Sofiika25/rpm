@@ -1,18 +1,7 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace rpm
 {
@@ -25,13 +14,6 @@ namespace rpm
             InitializeComponent();
             this.WindowState = WindowState.Maximized;
         }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    autorization autorization = new autorization();
-        //    autorization.Show();
-        //    this.Close();
-        //}
 
         private void Photo_Click(object sender, RoutedEventArgs e)
         {
@@ -55,42 +37,81 @@ namespace rpm
         {
             try
             {
-                using (PROEKTEntities6 db = new PROEKTEntities6())
+                MessageBoxButton btn = MessageBoxButton.OK;
+                MessageBoxImage ico = MessageBoxImage.Information;
+                string caption = "Дата сохранения";
+                if (string.IsNullOrWhiteSpace(Surname.Text) || string.IsNullOrWhiteSpace(FirstName.Text) 
+                    || string.IsNullOrWhiteSpace(Patronymic.Text) || string.IsNullOrWhiteSpace(PhoneNumber.Text) 
+                    || string.IsNullOrWhiteSpace(IdDirection.Text))
                 {
-                    if (Surname.Text.Trim() != "" && FirstName.Text.Trim() != "" && Patronymic.Text.Trim() != "" && Photo != null && PhoneNumber.Text.Trim() != "" && int.Parse(IdDirection.Text.Trim()) != null)
-                    {
-                        try
-                        {
-                            Treners treners = new Treners()
-                            {
-                                Surname = Surname.Text,
-                                FirstName = FirstName.Text,
-                                Patronymic = Patronymic.Text,
-                                Photo = photo,
-                                PhoneNumber = PhoneNumber.Text,
-                                IdDirection = int.Parse(IdDirection.Text)
-                            };
-                            db.Treners.Add(treners);                            
-                            db.SaveChanges();
-                            MessageBox.Show("Успешно добавлено");
+                    MessageBox.Show("Все поля обязательны для ввода.");
+                    FirstName.Text = "";
+                    Surname.Text = "";
+                    Patronymic.Text = "";
+                    PhoneNumber.Text = "";
+                    IdDirection.Text = "";
+                    return;
+                }
+                if (!Regex.IsMatch(FirstName.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+                {
+                    MessageBox.Show("Пожалуйста,введите имя повторно!", caption, btn, ico);
+                    FirstName.Text = "";
+                    return;
+                }
 
+                if (!Regex.IsMatch(Surname.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+                {
+                    MessageBox.Show("Пожалуйста, введите фамилию правильно!", caption, btn, ico);
+                    Surname.Text = "";
+                    return;
+                }
+               
+                 if (!Regex.IsMatch(Patronymic.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+                {
+                    MessageBox.Show("Пожалуйста,введите отчество повторно!", caption, btn, ico);
+                    Patronymic.Text = "";
+                    return;
+                }
+                
+                if (!Regex.IsMatch(PhoneNumber.Text, @"^\d{11}$"))
+                {
+                    MessageBox.Show("Пожалуйста, введите телефон правильно!", caption, btn, ico);
+                    PhoneNumber.Text = ""; 
+                    return;
+                }
+                
+                if (!Regex.IsMatch(IdDirection.Text, @"^\d{1,5}$"))
+                {
+                    MessageBox.Show("Пожалуйста, введите направление правильно!", caption, btn, ico);
+                    IdDirection.Text = ""; 
+                    return;
+                }
+                
+              
 
-                            Treners2 treners2 = new Treners2();
-                            treners2.Show();
-                            this.Close();
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Неверно введены данные");
-                        }
-                    }
-                    else
-                        MessageBox.Show("Не все поля заполнены");
+                using (PROEKTEntities6 db = new PROEKTEntities6())
+                {  
+                   Treners treners = new Treners()
+                   {
+                      Surname = Surname.Text,
+                      FirstName = FirstName.Text,
+                      Patronymic = Patronymic.Text,
+                      Photo = photo,
+                      PhoneNumber = PhoneNumber.Text,
+                      IdDirection = int.Parse(IdDirection.Text)
+                   };
+                    db.Treners.Add(treners);                            
+                    db.SaveChanges();
+                    MessageBox.Show("Успешно добавлено");
+
+                    Treners2 treners2 = new Treners2();
+                    treners2.Show();
+                    this.Close();
                 }
             }
             catch
             {
-                MessageBox.Show("Не все поля заполнены");
+                MessageBox.Show("Возникла ошибка");
             }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d" Icon="/log.png"
-        Title="О тренере"  Height="1024" Width="1440">
+        Title="О тренере"  MinHeight="700" MinWidth="1240">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,27 +28,28 @@
                     <Image Width="200" Margin="10" x:Name="Photo"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Фамилия: " FontSize="18" FontWeight="Black" />
-                            <TextBlock x:Name="Surname" Text="Я" FontSize="18" />
+                            <TextBlock Text="Фамилия: " Style="{StaticResource NameStyle}" FontWeight="Black" />
+                            <TextBlock x:Name="Surname" Style="{StaticResource NameStyle}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Имя: " FontSize="18" FontWeight="Black" />
-                            <TextBlock x:Name="FirstName" Text="я" FontSize="18" />
+                            <TextBlock Text="Имя: "  Style="{StaticResource NameStyle}" FontWeight="Black" />
+                            <TextBlock x:Name="FirstName"  Style="{StaticResource NameStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Отчество: " FontSize="18" FontWeight="Black" />
-                            <TextBlock x:Name="Patronymic" Text="В" FontSize="18" />
+                            <TextBlock Text="Отчество: " Style="{StaticResource NameStyle}" FontWeight="Black" />
+                            <TextBlock x:Name="Patronymic"  Style="{StaticResource NameStyle}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Направление: " Style="{StaticResource NameStyle}" />
+                            <TextBlock Text="Направление: "  FontWeight="Black" Style="{StaticResource NameStyle}" />
                             <TextBlock x:Name="IdDirection" Text="" Style="{StaticResource NameStyle}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBlock Text="Телефон: " Style="{StaticResource NameStyle}" />
+                            <TextBlock Text="Телефон: " Style="{StaticResource NameStyle}" FontWeight="Black" />
                             <TextBlock x:Name="PhoneNumber" Text="8900000000" Style="{StaticResource NameStyle }" />
-
                         </StackPanel>
-                        <TextBlock Text="Редактировать профиль" FontWeight="Bold" TextDecorations="Underline" Style="{StaticResource NameStyle }"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30" MouseDown="TextBlock_MouseDown"/>
+                        <TextBlock Text="Редактировать профиль" FontWeight="Bold" TextDecorations="Underline" 
+                                   Style="{StaticResource NameStyle }"  VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   Margin="30" MouseDown="TextBlock_MouseDown"/>
                     </StackPanel>
                 </StackPanel>
             </Border>

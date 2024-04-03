@@ -1,19 +1,6 @@
-﻿using Microsoft.OData.Edm;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using static rpm.raspisanie;
 
 namespace rpm
@@ -33,8 +20,8 @@ namespace rpm
             {
                 foreach (var f in db.Clients)
                 {
-                    table1.Items.Add(new Clients { Id_Client = f.Id_Client, Surname = f.Surname, FirstName = f.FirstName, Patronymic = f.Patronymic, PhoneNumber = f.PhoneNumber });
-                   
+                    table1.Items.Add(new Clients { Id_Client = f.Id_Client, Surname = f.Surname,
+                    FirstName = f.FirstName, Patronymic = f.Patronymic, PhoneNumber = f.PhoneNumber });
                 }               
             }
         }
@@ -48,7 +35,6 @@ namespace rpm
 
         private void EditButton_Click_1(object sender, RoutedEventArgs e)
         {
-
             Editclient editclient = new Editclient(null);
             editclient.Show();
 
@@ -82,8 +68,6 @@ namespace rpm
                 }
             }
         }
-
-        // Добавьте аналогичные свойства с реализацией OnPropertyChanged для других полей
 
         public event PropertyChangedEventHandler PropertyChanged;
 

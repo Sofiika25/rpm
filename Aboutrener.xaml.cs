@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для Aboutrener.xaml
-    /// </summary>
     public partial class Aboutrener : Window
     {
         Treners treners;
@@ -40,9 +28,8 @@ namespace rpm
                         FirstName.Text = e.FirstName;
                         Patronymic.Text = e.Patronymic;
                         PhoneNumber.Text = e.PhoneNumber;
-                        //IdDirection.Text = e.IdDirection.ToString();
                         var direction = db.Direction.FirstOrDefault(d => d.Id_Dir == e.IdDirection);
-                        IdDirection.Text = direction?.NameDir; // 
+                        IdDirection.Text = direction?.NameDir;  
                         MemoryStream stream = new MemoryStream(e.Photo);
                         Photo.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                     }

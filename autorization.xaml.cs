@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для autorization.xaml
-    /// </summary>
     public partial class autorization : Window
     {
         public autorization()
@@ -27,13 +14,34 @@ namespace rpm
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxButton btn = MessageBoxButton.OK;
+            MessageBoxImage ico = MessageBoxImage.Information;
+            string caption = "Дата сохранения";
             string LoginA = log.Text;
             string PasswordA = pas.Password;
+
             if (string.IsNullOrWhiteSpace(LoginA) || string.IsNullOrWhiteSpace(PasswordA))
             {
-                MessageBox.Show("Введите логин и пароль.");
+                MessageBox.Show("Все поля обязательны для ввода.");
+                LoginA = "";
+                PasswordA = ""; 
                 return;
             }
+            if (!Regex.IsMatch(LoginA, "^[A-za-z]{5,15}$"))
+            {
+                MessageBox.Show("Пожалуйста,введите логин повторно!", caption, btn, ico);
+                LoginA = ""; 
+                return;
+            }
+
+            if (!Regex.IsMatch(PasswordA, "^(?=.*[a-z])(?=.*\\d)[a-zA-Z\\d]{5,15}$"))
+            {
+                MessageBox.Show("Пожалуйста, введите пароль правильно!", caption, btn, ico);
+                PasswordA = ""; 
+                return;
+            }
+
+
             bool isAuthenticated = AuthenticateUser(LoginA, PasswordA);
 
             if (isAuthenticated)

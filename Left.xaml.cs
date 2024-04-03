@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для Left.xaml
-    /// </summary>
+    
     public partial class Left : UserControl
     {
         public Left()

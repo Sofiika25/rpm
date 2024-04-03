@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d" Icon="/log.png"
-        Title="Авторизация" Height="1024" Width="1440">
+        Title="Авторизация" MinHeight="700" MinWidth="1240">
     <Border BorderBrush="#FF9083EF" BorderThickness="10" CornerRadius="10" Padding="20" Margin="80">
         <Grid VerticalAlignment="Center">
-           
             <Grid Height="300">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -16,12 +15,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Добро пожаловать! Войдите в систему" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontFamily="Bookman Old Style" FontWeight="Bold" Margin="30"/>
+                <TextBlock Text="Добро пожаловать! Войдите в систему" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           FontSize="30" FontFamily="Bookman Old Style" FontWeight="Bold" Margin="30"/>
                 <Label Content="Логин:" Grid.Row="1" Style="{StaticResource LabelAutoriz}"/>
                 <TextBox x:Name="log" Grid.Row="1" Style="{StaticResource TBAutoriz}"/>
                 <Label Content="Пароль:" Grid.Row="2" Style="{StaticResource LabelAutoriz}"/>
                 <PasswordBox x:Name="pas" Grid.Row="2" Style="{StaticResource PasAutoriz}"/>
-                <Button Grid.Row="3" Content="Войти" Width="140" Height="40" Margin="110,20,10,0" FontSize="20" FontFamily="Bookman Old Style" FontWeight="Bold" BorderBrush="#FF8713EC" Background="#FFECAE63" Click="Button_Click"/>
+                <Button Grid.Row="3" Content="Войти" Width="140" Height="40" Margin="110,20,10,0" FontSize="20" FontFamily="Bookman Old Style"
+                        FontWeight="Bold" BorderBrush="#FF8713EC" Background="#FFECAE63" Click="Button_Click"/>
             </Grid>
         </Grid>
     </Border>

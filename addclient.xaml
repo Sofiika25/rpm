@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d" Icon="/log.png"
-        Title="Добавить клиента" Height="1024" Width="1440">
-
+        Title="Добавить клиента" MinHeight="700" MinWidth="1240">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,18 +13,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--<WrapPanel Grid.Row="0" Grid.ColumnSpan="2" Height="100" Width="auto" Background="BurlyWood">
-            <Grid Width="auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="54"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto" MinWidth="1084"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Image  Grid.Column="0" Margin="70,31,10,45" Source="C:\Users\1\Desktop\АААААААААААААААААААААААААААААААААААААААААААААААААААААААА\rpm\images\icons8-пользователь-мужчина-в-кружке.gif" RenderTransformOrigin="0.968,0.5" />
-                <TextBlock  Grid.Column="1" FontSize="16" FontFamily="Inter" Grid.ColumnSpan="2" Margin="0,36,1038,41" ><Run Text="Личный кабинет"  /></TextBlock>
-                <Button  Grid.Column="2" Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1046,0,0,0" Height="39" Width="110" Click="Button_Click"></Button>
-            </Grid>
-        </WrapPanel>-->
         <WrapPanel>
             <local:Top></local:Top>
         </WrapPanel>
@@ -34,20 +21,9 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-
-            <!--<Border Background="#EEE" Grid.Column="0" Height="924" Width="290" Margin="0"> 
-                <StackPanel Margin="20">
-                    <Button Content="Администратор" Style="{StaticResource ButtonPanelStyle}"  />
-                    <Button Content="Клиент" Style="{StaticResource ButtonPanelStyle}"  />
-                    <Button Content="Сотрудник" Style="{StaticResource ButtonPanelStyle}" />
-                    <Button Content="Расписание" Style="{StaticResource ButtonPanelStyle}" />
-                </StackPanel>
-            </Border>-->
             <WrapPanel>
                 <local:Left></local:Left>
             </WrapPanel>
-            <!-- Главная панель -->
             <Border Background="#FFF" Grid.Column="1" Width="1000">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -61,7 +37,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
                         <Label Content="Данные клиента" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />

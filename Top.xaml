@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:rpm"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="1380">
-    <StackPanel Height="100" Width="1380" Background="BurlyWood">
+    <WrapPanel Height="100" Width="1380" Background="BurlyWood">
         <Button Content="Выйти" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="25" Height="39" Width="110" Click="Button_Click"/>
-    </StackPanel>
+    </WrapPanel>
 </UserControl>

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="rpm.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:rpm"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="1150">
+    <Border BorderThickness="1" BorderBrush="#CCC" Margin="5" Padding="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+                <!-- Пятый столбец занимает оставшееся пространство -->
+            </Grid.ColumnDefinitions>
+            <!-- Первый столбец - Фотография клиента -->
+            <!-- Первый столбец - Фотография клиента -->
+            <Image Width="50" Height="50">
+                <Image.Source>
+                    <BitmapImage UriSource="https://i.pinimg.com/originals/c3/dd/58/c3dd58e7e25e4c53f05930019b989221.png" />
+                </Image.Source>
+            </Image>
+            <!-- Второй столбец - Имя клиента -->
+            <TextBlock Text="Иванива Мария В." FontWeight="Bold" Style="{StaticResource NameStyle}" VerticalAlignment="Center" Grid.Column="1"/>
+            <TextBlock Text="01.01.2000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="2"/>
+            <!-- Третий столбец - Тип группы клиента -->
+            <TextBlock Text="Индивидуальное" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="3"/>
+            <!-- Четвертый столбец - Вид танца клиента -->
+            <TextBlock Text="Бальные" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="4"/>
+            <TextBlock Text="89000000000" Style="{StaticResource SpecialtyStyle}" VerticalAlignment="Center" Grid.Column="5"/>
+        </Grid>
+    </Border>
+</UserControl>

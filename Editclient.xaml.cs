@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для Editclient.xaml
-    /// </summary>
     public partial class Editclient : Window
     {
         Clients clients;
@@ -34,47 +18,87 @@ namespace rpm
             this.WindowState = WindowState.Maximized;
         }
 
-       
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FirstName.Text.Trim() != "" && Surname.Text.Trim() != "" && Patronymic.Text.Trim() != "" && PhoneNumber.Text.Trim() != "")
+
+            System.Windows.MessageBoxButton btn = System.Windows.MessageBoxButton.OK;
+            System.Windows.MessageBoxImage ico = System.Windows.MessageBoxImage.Information;
+            string caption = "Дата сохранения";
+
+            if (string.IsNullOrWhiteSpace(Surname.Text) || string.IsNullOrWhiteSpace(FirstName.Text)
+                || string.IsNullOrWhiteSpace(Patronymic.Text) || string.IsNullOrWhiteSpace(PhoneNumber.Text))
             {
-                using (PROEKTEntities6 db = new PROEKTEntities6())
+                System.Windows.MessageBox.Show("Все поля обязательны для ввода.");
+                FirstName.Text = "";
+                Surname.Text = "";
+                Patronymic.Text = "";
+                PhoneNumber.Text = "";
+                return;
+            }
+            if (!Regex.IsMatch(FirstName.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста,введите имя повторно!", caption, btn, ico);
+                FirstName.Text = "";
+                return;
+            }
+
+            if (!Regex.IsMatch(Surname.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, введите фамилию правильно!", caption, btn, ico);
+                Surname.Text = "";
+                return;
+            }
+
+            if (!Regex.IsMatch(Patronymic.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста,введите отчество повторно!", caption, btn, ico);
+                Patronymic.Text = "";
+                return;
+            }
+
+            if (!Regex.IsMatch(PhoneNumber.Text, @"^\d{11}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, введите телефон правильно!", caption, btn, ico);
+                PhoneNumber.Text = "";
+                return;
+            }
+
+            using (PROEKTEntities6 db = new PROEKTEntities6())
+            {
+                try
                 {
-                    try
+                    Clients f = null;
+                    foreach (var en in db.Clients)
                     {
-                        Clients f = null;
-                        foreach (var en in db.Clients)
+                        if (en.Id_Client == this.clients.Id_Client)
                         {
-                            if (en.Id_Client == this.clients.Id_Client)
-                            {
-                                f = db.Clients.Find(en.Id_Client);
-                                break;
-                            }
+                            f = db.Clients.Find(en.Id_Client);
+                            break;
                         }
-                        f.FirstName = FirstName.Text;
-                        f.Surname = Surname.Text;
-                        f.Patronymic = Patronymic.Text;
-                        f.PhoneNumber = PhoneNumber.Text;
-                        db.SaveChanges();
-                        System.Windows.MessageBox.Show("Сохранено");
-                        Client client = new Client();
-                        client.Show();
-                        this.Close();
                     }
-                    catch
-                    {
-                        System.Windows.MessageBox.Show("Неверно введены данные");
-                    }
+                    f.FirstName = FirstName.Text;
+                    f.Surname = Surname.Text;
+                    f.Patronymic = Patronymic.Text;
+                    f.PhoneNumber = PhoneNumber.Text;
+                    db.SaveChanges();
+                    System.Windows.MessageBox.Show("Сохранено");
+
+                    Client client = new Client();
+                    client.Show();
+                    this.Close();
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Возникла ошибка");
                 }
             }
-            else
-                System.Windows.MessageBox.Show("Не все поля заполнены");
+     
         }
 
         private void DelButton_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить этого клиента?", "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
+            MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить этого клиента?",
+                "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
             if (r == MessageBoxResult.Yes)
             {
                 using (PROEKTEntities6 db = new PROEKTEntities6())

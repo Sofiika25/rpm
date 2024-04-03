@@ -1,25 +1,9 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace rpm
 {
-    /// <summary>
-    /// Логика взаимодействия для EditTrener.xaml
-    /// </summary>
     public partial class EditTrener : Window
     {
         Treners treners;
@@ -37,69 +21,94 @@ namespace rpm
             this.WindowState = WindowState.Maximized;
         }
 
+
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            //if (Photo.Text == "Успешно загружено")
-            //{
-                if (FirstName.Text.Trim() != "" && Surname.Text.Trim() != "" && Patronymic.Text.Trim() != "" && PhoneNumber.Text.Trim() != "" && IdDirection.Text.Trim() != "")
+           
+            System.Windows.MessageBoxButton btn = System.Windows.MessageBoxButton.OK;
+            System.Windows.MessageBoxImage ico = System.Windows.MessageBoxImage.Information;
+            string caption = "Дата сохранения";
+            if (string.IsNullOrWhiteSpace(Surname.Text) || string.IsNullOrWhiteSpace(FirstName.Text) || 
+                string.IsNullOrWhiteSpace(Patronymic.Text) || string.IsNullOrWhiteSpace(PhoneNumber.Text) ||
+                string.IsNullOrWhiteSpace(IdDirection.Text))
+            {
+                System.Windows.MessageBox.Show("Все поля обязательны для ввода.");
+                FirstName.Text = "";
+                Surname.Text = "";
+                Patronymic.Text = "";
+                PhoneNumber.Text = "";
+                IdDirection.Text = "";
+                return;
+            }
+            if (!Regex.IsMatch(FirstName.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста,введите имя повторно!", caption, btn, ico);
+                FirstName.Text = "";
+                return;
+            }
+
+            if (!Regex.IsMatch(Surname.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, введите фамилию правильно!", caption, btn, ico);
+                Surname.Text = "";
+                return;
+            }
+
+            if (!Regex.IsMatch(Patronymic.Text, "^[А-Яа-яA-Za-z]{5,20}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста,введите отчество повторно!", caption, btn, ico);
+                Patronymic.Text = "";
+                return;
+            }
+
+            if (!Regex.IsMatch(PhoneNumber.Text, @"^\d{11}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, введите телефон правильно!", caption, btn, ico);
+                PhoneNumber.Text = "";
+                return;
+            }
+            if (!Regex.IsMatch(IdDirection.Text, @"^\d{1,5}$"))
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, введите направление правильно!", caption, btn, ico);
+                IdDirection.Text = "";
+                return;
+            }
+
+            using (PROEKTEntities6 db = new PROEKTEntities6())
+            {
+                try
                 {
-                    using (PROEKTEntities6 db = new PROEKTEntities6())
+                    Treners f = null;
+                    foreach (var en in db.Treners)
                     {
-                        try
+                        if (en.Id_Trener == this.treners.Id_Trener)
                         {
-                            Treners f = null;
-                            foreach (var en in db.Treners)
-                            {
-                                if (en.Id_Trener == this.treners.Id_Trener)
-                                {
-                                    f = db.Treners.Find(en.Id_Trener);
-                                    break;
-                                }
-                            }
-                            f.FirstName = FirstName.Text;
-                            f.Surname = Surname.Text;
-                            f.Patronymic = Patronymic.Text;
-                            f.PhoneNumber = PhoneNumber.Text;
-                            //f.Photo = photo;
-                            db.SaveChanges();
-                            System.Windows.MessageBox.Show("Сохранено");
-                        Aboutrener aboutrener = new Aboutrener(treners);
-                        aboutrener.Show();
-                        this.Close();
-                        }
-                        catch
-                        {
-                            System.Windows.MessageBox.Show("Неверно введены данные");
+                            f = db.Treners.Find(en.Id_Trener);
+                            break;
                         }
                     }
-                }
-                else
-                    System.Windows.MessageBox.Show("Не все поля заполнены");
-            
-            
-            //}
+                    f.FirstName = FirstName.Text;
+                    f.Surname = Surname.Text;
+                    f.Patronymic = Patronymic.Text;
+                    f.PhoneNumber = PhoneNumber.Text;
+                    db.SaveChanges();
+                    System.Windows.MessageBox.Show("Сохранено");
 
+                    Treners2 treners2 = new Treners2();
+                    treners2.Show();
+                    this.Close();
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Возникла ошибка");
+                }
+            }
         }
-        //private void Photo_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-        //    openFileDialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF; *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG | All files(*.*) | *.* ";
-        //    if ((bool)openFileDialog.ShowDialog())
-        //    {
-        //        try
-        //        {
-        //            this.photo = File.ReadAllBytes(openFileDialog.FileName);
-        //            Photo.Text = "Успешно загружено";
-        //        }
-        //        catch
-        //        {
-        //            Photo.Text = "Ошибка";
-        //        }
-        //    }
-        //}
+       
         private void DelButton_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить этого тренера?", "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
+            MessageBoxResult r = (MessageBoxResult)System.Windows.MessageBox.Show("Вы точно хотите удалить этого тренера?",
+                "Уведомление", (MessageBoxButton)(MessageBoxButtons)MessageBoxButton.YesNo);
             if (r == MessageBoxResult.Yes)
             {
                 using (PROEKTEntities6 db = new PROEKTEntities6())
@@ -117,9 +126,6 @@ namespace rpm
                     db.Treners.Remove(f);
                     db.SaveChanges();
                     System.Windows.MessageBox.Show("Успешно удалено");
-
-                    //Aboutrener aboutrener = new Aboutrener(treners);
-                    //aboutrener.Close();
                     Treners2 treners2 = new Treners2();
                     treners2.Show();
                     this.Close();

@@ -5,42 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d" Icon="/log.png"
-        Title="Сотрудники" Height="1024" Width="1440">
+        Title="Сотрудники" MinHeight="700" MinWidth="1300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <WrapPanel>
             <local:Top></local:Top>
         </WrapPanel>
-  
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
             <WrapPanel>
                 <local:Left></local:Left>
-
             </WrapPanel>
-
-           
             <Border Grid.Column="1" Width="Auto" Background="#FFF">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
-                   
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-                        <Button Content="Добавить тренера" Margin="10" HorizontalAlignment="Right" Width="200" Click="Button_Click"/>
+                        <Button Content="Добавить тренера" Margin="10" HorizontalAlignment="Right" Width="200" 
+                                Click="Button_Click"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1">
-                        <DataGrid x:Name="table1" MouseUp="table1_MouseUp" Margin="20" HeadersVisibility="Column" AutoGenerateColumns="False"  Grid.Column="1" IsReadOnly="True">
+                        <DataGrid x:Name="table1" MouseUp="table1_MouseUp" Margin="20" HeadersVisibility="Column" 
+                                  AutoGenerateColumns="False"  Grid.Column="1" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Номер" Width="100" Binding="{Binding Id_Trener}"/>
                                 <DataGridTextColumn Header="Фамилия" Width="200" Binding="{Binding Surname}"/>

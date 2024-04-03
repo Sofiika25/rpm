@@ -274,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\log.png" />
-    <Resource Include="адрес.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="log.png" />

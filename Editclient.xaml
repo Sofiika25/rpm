@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:rpm"
         mc:Ignorable="d" Icon="/log.png"
-        Title="Редактировать клиента" Height="1024" Width="1440">
-
+        Title="Редактировать клиента" MinHeight="700" MinWidth="1240">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
