@@ -1,17 +1,19 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace rpm
 {
     public partial class Treners2 : Window
     {
+        public DataGrid Table1 => table1;
         public Treners2()
         {
             InitializeComponent();
             NewData();
             this.WindowState = WindowState.Maximized;
         }
-        private void NewData()
+        public void NewData()
         {
             table1.Items.Clear();
             using (var db = new PROEKTEntities6())
